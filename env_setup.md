@@ -1,15 +1,15 @@
-# Chaincode Development Environment
+# 체인코드(Chaincode) 개발 환경
 
-The following is a list of dependencies and recommended tools that you should install in order to develop chaincode.
-These dependencies are **not optional** (unless specifically stated).
+다음은 체인코드를 개발하기 위해 설치해야 하는 툴들입니다.(a list of dependencies and recommended tools)
+이 툴들은 단순히 옵션이 아니라 **반드시 설치해야 하는 것들입니다.**
 
 ## 1. Git
 
 - [Git](https://git-scm.com/downloads)
 
-Git is a wildy popular version control tool for software development.
-We can use it for chaincode development and our application development.
-It is required part of this demo since we will use `git clone` to download Marbles and Hyperledger Fabric code.
+Git 은 소프트웨어 개발에 있어 전세계적으로 가장 인기 있는 버전 관리 툴입니다.
+우리는 체인코드 및 애플리케이션 개발 시에 Git 을 사용할 수 있습니다.
+오늘 실습에서 Git 이 필요한 이유는 Marbles(구슬) 애플리케이션 코드 및 Hyperledger Fabric 코드를 다운로드 받기 위해  `git clone` 명령어를 사용할 것이기 때문입니다.
 
 ### Verify Git Installation
 
