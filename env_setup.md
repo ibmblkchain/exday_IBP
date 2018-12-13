@@ -153,47 +153,20 @@ $ mkdir -p $GOPATH/src/github.com/hyperledger
 $ cd $GOPATH/src/github.com/hyperledger
 ```
 
-2. 적절한 릴리즈 code 를 $GOPATH/src/github.com/hyperledger/fabric 안에 복제하십시오.
+2. Fabric 코드를 다운로드합니다.
 ```
-$ git clone https://github.com/hyperledger/fabric.git
-```
-
-3. 현재 Fabric 1.2 버전의 **commit hash** 값은 '4c634f6' 입니다. 해당 버전의 코드를 지정합니다.
-```
-cd fabric
-git checkout 4c634f6
+$ git clone -b release-1.2 https://github.com/hyperledger/fabric.git
 ```
 
-4. Confirm the level using git branch. It should show the commit level matching the one you provided.
-	```
-	git branch
-	```
-	![](/doc_images/git-branch-out.PNG)
-
-### Verify Fabric Installation
-Open a command prompt/terminal and browse to this directory `$GOPATH/src/github.com/hyperledger/fabric/examples/chaincode/go/chaincode_example02`
-
-```
-$ go build --tags nopkcs11 ./
-```
-
-It should return with no errors/warnings.
-You should also see that an executable was created in this directory.
-
-
-Note that the `nopkcs11` tag is important.
-PKCS 11 is a Public-Key Cryptography Standard that you are unlikely to have on your system.
-**Remember to use this flag as you develop/build your chaincode**.
-
-## 5. IDE Suggestions
+## 5. IDE 추천 툴
 
 - [Visual Studio Code](https://code.visualstudio.com/#alt-downloads)
 
-Visual Studio Code is a free IDE that supports all the languages in Marbles such as JS/CSS/HTML/GoLang.
+Visual Studio Code 는 공짜 무료 IDE 이며, JS/CSS/HTML/GoLang 등과 같이 본 실습에서 사용하는 모든 프로그래밍 언어를 지원합니다.
 
 - [Atom](https://atom.io/)
 
-Like VS Code, Atom has plugins to support any of the languages needed to develop chaincode or modify marbles.
+VS Code 와 같이, Atom 은 본 실습에서 체인코드를 개발하기 위한 모든 언어를 지원하는 플러그인을 갖고 있습니다.
 
-## 6. Finish Up
-Now that everything is setup, head back to the [tutorial](../README.md#downloadmarbles).
+## 6. 마치며
+이제 모든 필요한 툴들이 설치되었습니다. 다음 [실습1](../실습1.md) 으로 이동하십시오.
