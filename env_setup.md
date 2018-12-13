@@ -5,15 +5,23 @@
 
 ## 1. Git
 
-- [Git](https://git-scm.com/downloads)
+- [참조: Git 다운로드](https://git-scm.com/downloads)
 
 Git 은 소프트웨어 개발에 있어 전세계적으로 가장 인기 있는 버전 관리 툴입니다.
 우리는 체인코드 및 애플리케이션 개발 시에 Git 을 사용할 수 있습니다.
 오늘 실습에서 Git 이 필요한 이유는 Marbles(구슬) 애플리케이션 코드 및 Hyperledger Fabric 코드를 다운로드 받기 위해  `git clone` 명령어를 사용할 것이기 때문입니다.
 
-### Verify Git Installation
+### Git 설치하기
 
-After following the installation instructions above, you can verify that git is installed using the following command:
+제공된 리눅스(ubuntu) 서버에서 다음 명령어를 수행하십시오.
+
+```
+$ sudo apt-get install git
+```
+
+### Git 설치 확인
+
+설치를 완료하면 다음 명령어를 통해 Git 이 정상적으로 설치되었는지 확인할 수 있습니다:
 
 ```
 $ git --version
@@ -21,6 +29,8 @@ git version 2.11.1.windows.1
 ```
 
 ## 2. GoLang
+
+
 
 The Go installation installs a set of Go CLI tools which are very needed when writing chaincode.
 For example, the `go build` command allows you to check that your chaincode actually compiles before you attempt to deploy it to a peer.
