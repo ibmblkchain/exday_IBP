@@ -37,6 +37,8 @@ Go 설치 패키지는 Go CLI 툴을 포함하며, 이는 체인코드를 작성
 다음 명령어를 수행하여 설치를 진행하십시오.
 ```
 $ sudo apt install golang-go
+$ export GOPATH=$HOME/go
+$ export PATH=$PATH:$GOPATH/bin
 ```
 
 Go 설치에 대한 자세한 내용 및 문서, 튜토리얼은 아래 링크를 참조하십시오. 개진철.. 
@@ -82,80 +84,78 @@ vi editor 가 익숙하지 않은 경우 아래 순서대로 진행할 수 있�
 5. `:wq!` 를 입력한 후 엔터를 눌러 에디터를 종료한다.
 
 hello.go 파일 작성이 완료되었다면 빌드를 수행합니다. 
+
 	```
 	$ go build
 	```  
 
 위 명령어는 자신의 소스코드가 존재하는 디렉토리에 (/home/ubuntu/go) hello.exe 라는 이름의 실행 파일을 생성할 것입니다.
 잘 동작하는지 실행해 보십시오.  
-	```
+
+```
 	$ hello
 	hello, world
 	```  
-	
+
+
 "hello, world" 메시지를 확인하였다면 Go 설치를 정상적으로 완료한 것입니다.
 
 
 ## 3. Node.js
 
-Download and install Node.js v6, or v8.
-These are the only supported/compatible versions.
-As of 8/28/2018 **Marbles has dependencies that will not work with node.js v9 or v10**.
+Node.js 는 자바스크립트 기반의 서버측 프로그래밍 언어입니다. 우리는 본 실습에서 블록체인 네트워크와의 통신을 위해 Node.js SDK 를 이용할 것이며, 사용자 애플리케이션 또한 Node.js 로 작성할 것입니다. 이를 위해 Node.js v8 버전을 설치하겠습니다.
+현재 하이퍼레저 패브릭이 지원 및 호환하는 Node.js 버전은 v6 과 v8 입니다.
+그리고 본 실습에서 작성할 애플리케이션은 Node.js v9 또는 v10 과 호환되지 않는 점을 유의하시기 바랍니다.
+
+다음 명령어를 통해 Node.js 및 npm (Nodejs Package Manager) 를 설치하십시오.
 
 
-- [Node.js Download Page](https://nodejs.org/en/download/)
+```
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+apt-get install nodejs
+```  
+
+- [참고: Node.js Download Page](https://nodejs.org/en/download/)
 
 
-###  Verify Node.js Installation
+###  Node.js 설치 확인
 
-Open a command prompt/terminal and make sure the following commands work on your machine:
+다음 명령어가 정상적으로 수행되는지 확인하십시오.
 
 ```
 $ node -v
 v8.11.4
 
 $ npm -v
-5.6.0
+6.4.0
 ```
 
-It is not important that your version numbers match the ones shown above.
-It is important that the commands printed out compatible verison numbers.
+위의 버전 넘버와 자신의 것이 완전히 일치하는지는 중요하지 않습니다.
+명령어가 수행되는지, 그리고 Node.js 의 major 버전이 v8 인지가 중요합니다.
+
 
 ## 4. Hyperledger Fabric
 
-Any chaincode that you write will need to import the chaincode shim from Hyperledger Fabric.
-Therefore in order to compile chaincode locally you will need to have the fabric code present in your `GOPATH`.
-If you don't do this step you will not be able to build your chaincode locally, which means you will be unable to make modifications.
+체인코드를 작성하기 위해서는 Hyperledger Fabric 의 shim 라이브러리를 체인코드 소스에 import 해야 합니다.
 
-**Choose 1 option below** (read each before you choose):
+따라서 로컬 환경에서 체인코드를 컴파일 하기 위해서는 fabric code 를 `GOPATH` 내에 저장해 두어야 합니다.
+만약 이 과정을 수행하지 않는다면 로컬 환경에서 체인코드를 빌드할 수 없습니다. 즉 체인코드를 수정할 수 없다는 의미입니다.
 
-- **Option 1:** :lollipop: This option is for those that do not want to modify chaincode.  You will be running marbles as is.
-	- There are no steps, you are already done! Head back to the [tutorial](../README.md#downloadmarbles).
-
-- **Option 2:**  This option is for those that want to modify chaincode and use a local Fabric network with the most recent Fabric version
-	- [Releases of Hyperledger Fabric](https://github.com/hyperledger/fabric/releases).
-	- You will need to find the commit hash of your release. Click the releases link above and find the most recent release.  Click it and the release's commit hash is below the release version, similar to the picture below.
-	- Remember this hash and go to the `Continue the Fabric Install Instructions` section below. You will enter the hash there.
-	![](/doc_images/release_hash.png)
-
-- **Option 3:** Choose this option if you want to modify chaincode and use the Blockchain Service for my network
-	- Get the commit hash from your network or use the hash `ae4e37d`.
-		- If you have a network on the IBM Cloud service, then the exact Fabric version can be found in the "Support" tab under the "Release Notes" section of your network's dashboard.
-	 - Go to the `Continue the Fabric Install Instructions` section below. You will enter the hash there.
+Get the commit hash from your network or use the hash `ae4e37d`.
 
 
-### Continue the Fabric Install Instructions
-The release you are cloning locally should match the Hyperledger Fabric network you are using when you deploy your application.
-You should apply the choice you made above to the instructions below when doing the `git checkout` step.
-The point of all of this is to simply have the same version of Fabric on your local computer as the one running your network.
+### Fabric 설치 가이드
+현재 기준으로 IBM Blockchain Platform 상의 Hyperledger Fabric 릴리즈 버전은 1.2 입니다. 
+여기서 중요한 점은 개발 환경과 자신의 블록체인 환경 간에 Fabric 버전이 동일해야 한다는 것입니다.
+따라서 개발 환경에서도 동일하게 1.2 버전의 Fabric 을 설치해야 합니다. 
 
-1. Create the parent directories on your GOPATH
+1. GOPATH 내에 parent 디렉토리를 생성하십시오. 
 	```
 	mkdir -p $GOPATH/src/github.com/hyperledger
 	cd $GOPATH/src/github.com/hyperledger
 	```
 
-2. Clone the appropriate release codebase into $GOPATH/src/github.com/hyperledger/fabric
+2. 적절한 릴리즈 code 를 $GOPATH/src/github.com/hyperledger/fabric 안에 복제하십시오.
 	```
 	git clone https://github.com/hyperledger/fabric.git
 	```
