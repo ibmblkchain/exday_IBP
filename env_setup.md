@@ -93,9 +93,9 @@ hello.go 파일 작성이 완료되었다면 빌드를 수행합니다.
 잘 동작하는지 실행해 보십시오.  
 
 ```
-	$ hello
-	hello, world
-	```  
+$ hello
+hello, world
+```
 
 
 "hello, world" 메시지를 확인하였다면 Go 설치를 정상적으로 완료한 것입니다.
@@ -141,8 +141,6 @@ $ npm -v
 따라서 로컬 환경에서 체인코드를 컴파일 하기 위해서는 fabric code 를 `GOPATH` 내에 저장해 두어야 합니다.
 만약 이 과정을 수행하지 않는다면 로컬 환경에서 체인코드를 빌드할 수 없습니다. 즉 체인코드를 수정할 수 없다는 의미입니다.
 
-Get the commit hash from your network or use the hash `ae4e37d`.
-
 
 ### Fabric 설치 가이드
 현재 기준으로 IBM Blockchain Platform 상의 Hyperledger Fabric 릴리즈 버전은 1.2 입니다. 
@@ -150,15 +148,15 @@ Get the commit hash from your network or use the hash `ae4e37d`.
 따라서 개발 환경에서도 동일하게 1.2 버전의 Fabric 을 설치해야 합니다. 
 
 1. GOPATH 내에 parent 디렉토리를 생성하십시오. 
-	```
-	mkdir -p $GOPATH/src/github.com/hyperledger
-	cd $GOPATH/src/github.com/hyperledger
-	```
+```
+$ mkdir -p $GOPATH/src/github.com/hyperledger
+$ cd $GOPATH/src/github.com/hyperledger
+```
 
 2. 적절한 릴리즈 code 를 $GOPATH/src/github.com/hyperledger/fabric 안에 복제하십시오.
-	```
-	git clone https://github.com/hyperledger/fabric.git
-	```
+```
+$ git clone https://github.com/hyperledger/fabric.git
+```
 
 3. Match this version to the **commit hash** of your network/Fabric (the first 7 characters will work)
 	```
