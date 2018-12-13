@@ -85,9 +85,9 @@ vi editor 가 익숙하지 않은 경우 아래 순서대로 진행할 수 있�
 
 hello.go 파일 작성이 완료되었다면 빌드를 수행합니다. 
 
-	```
-	$ go build
-	```  
+```
+$ go build
+```  
 
 위 명령어는 자신의 소스코드가 존재하는 디렉토리에 (/home/ubuntu/go) hello.exe 라는 이름의 실행 파일을 생성할 것입니다.
 잘 동작하는지 실행해 보십시오.  
@@ -143,8 +143,8 @@ $ npm -v
 
 
 ### Fabric 설치 가이드
-현재 기준으로 IBM Blockchain Platform 상의 Hyperledger Fabric 릴리즈 버전은 1.2 입니다. 
-여기서 중요한 점은 개발 환경과 자신의 블록체인 환경 간에 Fabric 버전이 동일해야 한다는 것입니다.
+현재 기준으로 IBM Blockchain Platform 상의 Hyperledger Fabric 릴리즈 버전은 1.2 입니다.  
+여기서 중요한 점은 개발 환경과 자신의 블록체인 환경 간에 Fabric 버전이 동일해야 한다는 것입니다.  
 따라서 개발 환경에서도 동일하게 1.2 버전의 Fabric 을 설치해야 합니다. 
 
 1. GOPATH 내에 parent 디렉토리를 생성하십시오. 
@@ -158,11 +158,11 @@ $ cd $GOPATH/src/github.com/hyperledger
 $ git clone https://github.com/hyperledger/fabric.git
 ```
 
-3. Match this version to the **commit hash** of your network/Fabric (the first 7 characters will work)
-	```
-	cd fabric
-	git checkout ae4e37d
-	```
+3. 현재 Fabric 1.2 버전의 **commit hash** 값은 '4c634f6' 입니다. 해당 버전의 코드를 지정합니다.
+```
+cd fabric
+git checkout 4c634f6
+```
 
 4. Confirm the level using git branch. It should show the commit level matching the one you provided.
 	```
