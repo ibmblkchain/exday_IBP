@@ -11,32 +11,34 @@ IBM 클라우드 서비스는 블록체인 네트워크를 형ㅇ성하는 우�
 
 ![](/doc_images/bluemix_ibc1.png)
 
-1. Find and click the "Blockchain" tile by typing `blockchain` in the search box.
+1. 검색 창에서 "Blockchain" 으로 검색하여 관련 서비스를 찾으십시오. ~~물론 노가다로 찾으셔도 됨~~
 
 ![](/doc_images/bluemix_ibc2.png)
 
-1. Once you selected the blockchain tile you will see the service instance creation screen. This is where you select where the service will be created. Each drop down will allow you to select what Region/Org/Space to create the service.
-    - You can leave these settings alone if you are new to IBM Cloud or Cloud Foundry.  These settings control the Cloud Foundry way of organizing services and applications. If these terms confuse you then leave the default values alone.
-
+1. 블록체인 타일을 선택하면 서비스 인스턴스 생성 화면이 보일 것입니다. 여기서 블록체인 서비스를 생성할 수 있는데요, 인스턴스명이라던가 서버 지역(Region) / 조직(Org) / 스페이스(Space) 등을 지정할 수 있습니다.
+    - 무슨 말인지 잘 모르겠으면 이런 세팅들은 default 로 그냥 놔두셔도 됩니다. IBM Cloud 에서 이 세팅값들은 때때로 중요한 사항이지만, 우리 실습에서는 중요하지 않기 때문입니다.
+    
 ![](/doc_images/bluemix_ibc3.png)
 
-1. Leave the "Service Name" alone or you can choose to rename it to something more meaningful such as "Awesome Marbles"
-1. Scroll to the bottom and change the "Selected Plan" to **:lollipop: Starter Membership Plan** or **Enterprise Membership Plan** (these instructions are tailored for starter plan, but the enterprise plan is very similar, you will likely be able to follow along)
-1. Click the "Create" button on the bottom right.
+1. "Service Name" 은 자신의 것임을 알 수 있는 이름으로 변경(rename) 해주십시오.
+2. 하단으로 스크롤을 내려서 "Selected Plan" 을 **:lollipop: Starter Membership Plan** 으로 변경해 주십시오. ~~잘못하면 청구서 폭탄~~
+이 실습은 starter plan 을 기준으로 구성되어 있지만, enterprise plan 이라고 해서 다를 것은 없다는 점 참고해 주십시오.
+3. 가장 하단 우측의 "Create" 버튼을 클릭하십시오.
 
 ![](/doc_images/bluemix_ibc4.png)
 
-- If all goes well you should see a similar screen as the image above.
-- Congrats, you have a blockchain network! Click the "Launch" button to enter your blockchain's monitoring UI.
-- You are currently eyeballing the "Let's get started!" modal. Dismiss it with the "Got it" button (or read it if you are bored).
+- 만약 생성이 성공적으로 잘 되었다면 위와 같은 화면이 보이셔야 합니다.
+- 축하합니다! ~~아직 한 게 없는 건 함정~~ 방금 블록체인 네트워크를 생성하셨습니다! "Launch" 버튼을 눌러서 블록체인 모니터링 UI 로 접속하십시오.
+- Hyperledger Fabric 을 로컬에 직접 설치해보신 분은 알겠지만, 블록체인 인프라를 구성하는 작업은 쉽기도 하면서 때로는 매우 어렵습니다. 각 회사 또는 개인은 그에 맞는 환경이 존재하며 요건도 다르기 때문인데요, 특히 처음 설치는 쉬울지 몰라도 환경을 유지하는 것은 더더욱 많은 수작업이 요구됩니다. IBM Cloud 의 블록체인 네트워크는 그러한 수고를 완전히 덜어주기 때문에 매력적입니다. 우리는 몇 번의 클릭만으로 블록체인 네트워크를 생성하였으며 이는 시작일 뿐입니다.
+- "Let's get started!" 팝업창(modal) 을 보고 계시죠? 일단은 "Got it" 버튼을 눌러서 스킵하겠습니다.
 
 ![](/doc_images/bluemix_ibc5.png)
 
-- Behind that modal is your list of nodes for you network. This is your "Overview" page.
+- "Overview" 페이지를 확인할 수 있습니다. 여기에 자신의 블록체인 네트워크에 존재하는 노드(node) 리스트가 보입니다.
 
 ![](/doc_images/bluemix_ibc6.png)
 
-- The overview page is listing out your peers, CAs, and orderers.  You likely have 1 of each.
+- "Overview" 페이지에서는 자신의 피어(peers), CA 서버(CAs), 오더러(orderers) The overview page is listing out your peers, CAs, and orderers.  You likely have 1 of each.
 	- The handy information on this page is the node statuses (hopefully they all say `Running`) and the `View Logs` link which is in the overflow menu at the end of each row (under the `Actions` column).
 
 - We have one more thing to do for the network setup. We need to make a channel.
