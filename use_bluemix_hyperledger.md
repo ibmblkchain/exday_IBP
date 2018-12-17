@@ -38,60 +38,62 @@ IBM 클라우드 서비스는 블록체인 네트워크를 형ㅇ성하는 우�
 
 ![](/doc_images/bluemix_ibc6.png)
 
-- "Overview" 페이지에서는 자신의 피어(peers), CA 서버(CAs), 오더러(orderers) The overview page is listing out your peers, CAs, and orderers.  You likely have 1 of each.
-	- The handy information on this page is the node statuses (hopefully they all say `Running`) and the `View Logs` link which is in the overflow menu at the end of each row (under the `Actions` column).
-
-- We have one more thing to do for the network setup. We need to make a channel.
-- If you are using Starter plan than we already created a channel for you called `defaultchannel`. But I'll run you through the process anyway because its a good thing to know and its non-trivial.
-    - A channel is used to isolate our blockchain ledger from others on the network.  Later we will have the opportunity to invite members of our network to our channel. For now we just want to make a channel for ourself.
-- Click the "Channels" link on the left navigation menu.
+- "Overview" 페이지에서는 자신의 피어(peers), CA 서버(CAs), 오더러(orderers) 등이 보입니다. 처음 서비스를 생성하면 ~~아마~~ 각각 1개 씩 생성되어 있을 겁니다.
+	- 기본적으로 각 노드의 상태가 보이며('Running' 이라고 되어 있어야 할텐데요) 각 행의 끝에 위치한 Actions 컬럼의 메뉴에는 `View Logs` 등이 존재합니다.
+	
+- 네트워크 세팅을 위해서 해야할 일이 한가지 더 있습니다. 바로 채널(channel) 을 만들어야 합니다.
+- Starter plan 을 사용하면 `defaultchannel` 이라는 채널이 하나 이미 생성되어 있을 겁니다. 하지만 이 실습에서는 학습을 위해 채널을 하나 직접 만들어 보겠습니다. 개념을 익히는 것이 중요하니까요.
+    - 채널은 하나의 동일 네트워크 상에서 두 개 이상의 블록체인 원장을 서로 완전히 분리(isolate) 하기 위해 사용됩니다. 나중에 자신의 채널에 멤버(members) 들을 초대할 것이며, 지금은 그냥 하나 만들기만 하겠습니다.
+- 좌측 네비게이션 메뉴에서 "Channels" 링크 버튼을 클릭하십시오.
 
 ![](/doc_images/bluemix_ibc7.png)
 
-- Next click the create "Request Channel" button in the top right. You will see a panel similar to the image below.
+- 다음으로 우측 상단의 "Request Channel" 생성 버튼을 누르십시오. 아래 이미지와 비슷한 패널을 보게 되실 겁니다.
 
 ![](/doc_images/bluemix_ibc8.png)
 
-- Give your channel a name and description if you want
-    - Due to the crazy rules it may take a few minuets to pick a good name.  Stick to lowercase letters, numbers, dashes, and dots.
-- Then click "Next"
+- 채널명을 입력해 주세요. 설명(desc) 도 함께 달아주시면 더 좋겠죠?
+    - 미친 규정들 때문에 좋은 채널 이름을 선택하는데 시간이 걸릴 수 있습니다. 소문자(lowercase letters), 숫자(numbers), 대쉬(dashes) 그리고 마침표(dots) 가 가능합니다.
+
+- 정했으면 "Next" 를 클릭하십시오.
+
 
 ![](/doc_images/bluemix_ibc9.png)
 
-- We need ourself added as an "Operator". So find your email address and check the Operator box next to it.
-	- Operator means we get to vote on changes to this channel.
-- If we wanted to invite others to the channel, we could add them from the drop down and select their roles. For now lets only have ourself on this channel.
-- Then click the "Next" button
+- 자기 자신을 "Operator" 역할로 추가할 필요가 있습니다. 자신의 이메일 주소를 찾아서 Operator 박스에 클릭해 주세요.
+	- Operator 이 의미하는 바는 이 채널에 대한 변경 사항을 "투표(vote)" 할 수 있는 권한을 갖게 된다는 것입니다.
+- 만약 이 채널에 다른 사람들을 초대하고 싶으면 그들의 이메일 주소를 드랍 다운에 추가하고 역할(role) 을 체크하면 됩니다. 하지만 그건 나중에 합시다!
+- 다 완료되었으면 "Next" 버튼을 클릭하십시오.
 
 ![](/doc_images/bluemix_ibc10.png)
 
-- The update policy decides what it takes to make changes to the channel. In this case how many operators should it take. Since we only have ourself on the channel, the only value that makes sense is 1. Use the dropdown to set this to 1.
-- Then click the "Submit Request" button
+- 업데이트 정책을 이용하면 채널 설정에 대한 변경이 가해졌을 때의 프로세스를 수립할 수 있습니다. 여기에서는 얼마나 많은 operator 가 변경 사항을 수락해야 하느냐에 관한 설정을 합니다. 우리는 아직까지 자기 자신만 채널에 가입되어 있기 때문에 1 로 설정을 하는 것이 바람직합니다.
+- 설정이 완료되었다면 "Submit Request" 버튼을 클릭해 주십시오.
 
 ![](/doc_images/bluemix_ibc11.png)
 
-- OK. So the request is made, but we still have to sign it and submit it.
-- In the "Notifications" tab look for a pending request with your channel name on it.
-- Open the request by clicking the big giant button in the Actions column called "Review Request"
-    - You could review it by expanding each section, but since we made it we know whats inside
+- 데헷. 이제 요청은 보내졌지만 아직 더 해야 할 일이 남아 있습니다. (sign it and submit it)
+- "Notifications" 탭에서 pending request 상태의 자신의 채널을 찾아보세요.
+- Actions 탭에 "Review Request" 라고 되어 있는 커다란 버튼을 클릭하여 요청을 보내십시오.
+    - 각 색션을 펼쳐서 요청을 재검토하는 것이 정석이지만. 하지만 어짜피 우리가 만든 것이므로 넘어가는 것입니다.
 
 ![](/doc_images/bluemix_ibc12.png)
 
-- With the notification opened we can now sign the request by clicking "Approve"
-	- After clicking "Approve" the notification will close
-- Next submit the request with the "Submit Request" button
+- 이제 진짜 마지막으로 "Approve" 버튼을 눌러 최종 완료를 진행할 수 있습니다.
+	- "Approve" 버튼을 누르면 이제 notification 은 종료됩니다.
+- "Submit Request" 버튼을 클릭하여 요청을 제출하십시오.
 
 ![](/doc_images/bluemix_ibc13.png)
 
-- Now browse to the "Channels" page in the left navigation menu. It should look similar to the image above.
-- If all went well you should see the channel name listed after the panel refreshes
+- 이제 좌측 네비게이션 바에서 "Channels" 페이지를 열어 보겠습니다. 위와 비슷한 화면이 보이면 정상입니다.
+- 특히 자신의 채널명이 리스트에 보여야 합니다. ~~없으면 망한 겁니다~~
 
 ![](/doc_images/bluemix_ibc14.png)
 
-- But we are not quite done... Click the dots in the action column and select the "Join Peers" option
-- A menu will appear, check all of your peers and then click the "Join Selected" button
-- If the stars align the peer will be joined to your channel and everything is done
-	- You can tell it was successful if the date created and block height (on the channels page) have dates and a number, instead of a '-'
+- 아 그러나 마직 완전히 끝난 것은 아닙니다... action 컬럼에서 dots(쩜쩜쩜으로 된 이미지) 를 클릭하여 "Join Peers" 옵션을 선택해 주십시오.
+- 새로운 메뉴가 나타날 것입니다. 모든 피어들을 체크한 후 "Join Selected" 버튼을 클릭해 주십시오.
+- 만약 피어가 채널에 가입될 것이라는 별표가 보이면 이제 모든 것이 된 것입니다.
+	- 날짜가 생성되고 블록 길이(block height) 가 날You can tell it was successful if the date created and block height (on the channels page) have dates and a number, instead of a '-'
 	- If you don't see a date, refresh the page or repeat the join
 
 ### Finish Up
