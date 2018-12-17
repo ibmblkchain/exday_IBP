@@ -1,13 +1,13 @@
-# Use IBM Cloud Blockchain Service:
+# IBM 클라우드 블록체인 서비스:
 
-### Creating a Blockchain Network in IBM Cloud (Starter Plan)
-1. Don't fret, this is as simple as clicking on a particular button and filling out a text input field or two.
-  The IBM Cloud service will run our peers and orderer which forms our blockchain network.
-  We also have the ability to join other networks, but let’s focus on creating our own.
+### IBM Cloud 에서 블록체인 네트워크 생성하기 (스타터 플랜)
+1. IBM Cloud 에서 블록체인 네트워크를 생성하는 것은 버튼 몇 번과 양식 한 두개만 채우면 쉽게 가능합니다.
+IBM 클라우드 서비스는 블록체인 네트워크를 형ㅇ성하는 우리의 피어들과 오더러를 구동시킬 것이다.
+또 우리는 다른 네트워크에 가입(join) 할 수 있지만, 지금은 일단 우리 것을 생성하는데 집중하겠습니다.
 
-1. First [create an IBM ID](https://console.ng.bluemix.net/registration/) if you do not already have one.
-1. Then login to [IBM Cloud](https://console.ng.bluemix.net)
-1. Click the "Catalog" link on the top navigation bar
+1. 만약 IBM Cloud 계정을 갖고 있지 않다면 먼저 [IBM ID 를 생성](https://console.ng.bluemix.net/registration/) 하십시오.
+2. [IBM Cloud](https://console.ng.bluemix.net) 에 로그인 해주십시오.
+3. 화면 상단의 네비게이션 바에서 "카탈로그(Catalog)" 를 클릭하십시오.
 
 ![](/doc_images/bluemix_ibc1.png)
 
