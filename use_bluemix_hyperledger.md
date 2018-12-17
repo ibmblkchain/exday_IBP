@@ -92,11 +92,11 @@ IBM 클라우드 서비스는 블록체인 네트워크를 형ㅇ성하는 우�
 
 - 아 그러나 마직 완전히 끝난 것은 아닙니다... action 컬럼에서 dots(쩜쩜쩜으로 된 이미지) 를 클릭하여 "Join Peers" 옵션을 선택해 주십시오.
 - 새로운 메뉴가 나타날 것입니다. 모든 피어들을 체크한 후 "Join Selected" 버튼을 클릭해 주십시오.
-- 만약 피어가 채널에 가입될 것이라는 별표가 보이면 이제 모든 것이 된 것입니다.
-	- 날짜가 생성되고 블록 길이(block height) 가 날You can tell it was successful if the date created and block height (on the channels page) have dates and a number, instead of a '-'
-	- If you don't see a date, refresh the page or repeat the join
+- 만약 피어가 채널에 가입될 것이라는 별표가 보이면 모든 것이 끝입니다.
+	- 날짜가 생성되고 블록 길이(block height) 가 dash ('-') 대신에 날짜 및 숫자를 가지면 성공한 것입니다.
+	- 만약 그렇지 않다면, 페이지를 refresh 해보거나 가입(join) 을 다시 진행하십시오.
 
-### Finish Up
-Congrats! The network is all setup. If you want more detail on the IBM Blockchain service, available plans, or a detailed overview of the IBM Blockchain Dashboard, jump over [here](https://console.ng.bluemix.net/docs/services/blockchain/index.html?pos=2). If not let’s continue the setup.
+### 마치며
+축하합니다! 블록체인 네트워크의 모든 세팅을 완료하였습니다. 만약 IBM 블록체인 서비스, 가용 플랜, IBM 블록체인 대시보드 등에 대해 더 자세히 알고 싶다면 [여기](https://console.ng.bluemix.net/docs/services/blockchain/index.html?pos=2) 로 이동하십시오. 하지만 아직 갈 길이 멉니다.
 
-- Continue where you left off in the [tutorial](../README.md#installchaincode).
+- 다음 [다음 실습](../README.md#installchaincode) 으로 이동하십시오.
