@@ -1,6 +1,6 @@
 ## IBM Blockchain Platform - Experience Day  
-#### [실습1_메인](https://github.com/ibmblkchain/exday_IBP/blob/master/실습1.md)  
-#### [실습2_개발 환경 세팅](https://github.com/ibmblkchain/exday/blob/master/실습2.md)  
-#### [실습3_블록체인 생성하기 on IBM Cloud](./실습3.md)  
-#### [실습4_체인코드 설치하기 on IBM Cloud](./실습4.md)  
+#### [실습0_메인](https://github.com/ibmblkchain/exday_IBP/blob/master/실습0_메인.md)  
+#### [실습1_개발환경_구성하기](https://github.com/ibmblkchain/exday/blob/master/실습1_개발환경_구성하기.md)  
+#### [실습2_IBM_Blockchain_Platform_시작하기](./실습2_IBM_Blockchain_Platform_시작하기.md)  
+#### [실습3-2_체인코드_설치하기](./실습3-2_체인코드_설치하기.md)  
 
