@@ -138,24 +138,23 @@ config 디렉토리에 우리가 사용할 수 있는 예시(example) 가 있습
 
 **Field 상세**
 
-- `name` - The main purpose of this is to detect when people try to use the default file w/o editing! Set it to anything other than `Place Holder Network Name` to get past the startup check.
-- `x-networkId` - Unique id of the network set by the IBM Blockchain Platform service. Not necessary for a local hyperledger fabric network..
-- `x-type` - Used by Hyperledger Composer to indicate what connector to use. Typically `hlfv1`. Only necessary if using Composer.
+- `name` - 이 필드의 주요한 목적은 사람들이 아무런 수정없이 default 설정파일을 사용하려고 하는 것을 감지하기 위해서 입니다. 향후에 체크를 위해서 `Place Holder Network Name` 말고 다른 값을 적어 두십시오.
+- `x-networkId` - IBM 블록체인 플랫폼 서비스에 의해 생성되는 Unique id. (로컬에 hyperledger fabric 네트워크를 구성할 때는 필요 X)
+- `x-type` - 하이퍼레저 콤포저(Hyperledger Composer) 툴에서 무슨 connector 를 사용하지 명시하는 필드이며 일반적으로 `hlfv1`. (Composer 을 사용하지 않는다면 필요 X)
 - `client`
-	- `organization` - The name of the org to use for our application. This name will match an entry in the `organizations` object.
+	- `organization` - 자신의 애플리케이션에서 사용할 org 명. 이 이름은 `organizations' 오브젝트의 엔트리에 match 됨
 	- `credentialStore` - (Optional)
-		- `path` - The path of a key value store for the SDK to use.  Stores crypto material.
+		- `path` - SDK가 사용할 키값 저장소(key value store) 경로. 암호 곤련 파일들을 저장함.
 - `channels`
-	- `orderers` - An array of names of a orderers that have joined this channel. Each name will match an entry in the `orderers` object.
-	- `peers` - A dictionary of peers that has joined this channel.
-	- `chaincodes` - An array of strings representing instantiated chaincode on this channel. The id and version are separated by a colon.
-	- `x-blockDelay` - Time in ms for a block to be created by the orderer. This is a setting for the channel that marbles will use to set timeouts.
+	- `orderers` - 채널에 가입한 orderer 들의 집합. 각각의 이름은 `orderers` 오브젝트의 엔트리에 match 됨.
+	- `peers` - 채널에 가입한 peer 들
+	- `chaincodes` - 채널에 초기화(instantiated) 된 체인코드들. id 및 버전은 콜론(colon) 으로 분리된다.
+	- `x-blockDelay` - orderer 에 의해 생성되는 블록 생성 주기(ms). 이 중요한 속성이 설정되는 대상이 채널임을 유추할 수 있다.
 - `organizations`
-	- `peers` - The key name of a peer that is owned by this org. This name will match an entry in the `peers` object.
-	- `certificateAuthorities` - The key name of a ca that is owned by this org. This name will match an entry in the `certificateAuthorities` object.
-	- `peers` - The key name of a peer that is owned by this org. This name will match an entry in the `peers` object.
-	- `adminPrivateKey` - Note this object can contain `path` **or** `pem` fields.
-		- `path`- The path to an admin private key. Used during install and instantiated.
+	- `peers` - org 가 소유한 각 peer 의 키 이름. 이 이름은 `peers` 오브젝트의 엔트리에 match 됨
+	- `certificateAuthorities` - org 가 소유한 각 ca 의 키 이름. 이 이름은 `certificateAuthorities` 오브젝트의 엔트리에 match 됨.
+	- `adminPrivateKey` - 이 오브젝트는 `path` **또는** `pem` 필드를 포함한다는 점을 참고하십시오.
+		- `path`- 관리자(admin) 개인키 경로. 설치 및 초기화 시에 사용된다.
 		- `pem` - The admin private key. Used during install and instantiated.
 	- `signedCert` - Note this object can contain `path` **or** `pem` fields.
 		- `path` - The path to an admin signed certificate. Used during install and instantiate.
