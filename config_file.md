@@ -153,24 +153,24 @@ config 디렉토리에 우리가 사용할 수 있는 예시(example) 가 있습
 - `organizations`
 	- `peers` - org 가 소유한 각 peer 의 키 이름. 이 이름은 `peers` 오브젝트의 엔트리에 match 됨
 	- `certificateAuthorities` - org 가 소유한 각 ca 의 키 이름. 이 이름은 `certificateAuthorities` 오브젝트의 엔트리에 match 됨.
-	- `adminPrivateKey` - 이 오브젝트는 `path` **또는** `pem` 필드를 포함한다는 점을 참고하십시오.
+	- `adminPrivateKey` - 이 오브젝트는 `path` **또는** `pem` 필드를 포함할 수 있는 점을 참고하십시오.
 		- `path`- 관리자(admin) 개인키 경로. 설치 및 초기화 시에 사용된다.
-		- `pem` - The admin private key. Used during install and instantiated.
-	- `signedCert` - Note this object can contain `path` **or** `pem` fields.
-		- `path` - The path to an admin signed certificate. Used during install and instantiate.
-		- `pem` - The admin signed certificate. Used during install and instantiate.
-- `orderers` - An object. Must have at least 1 entry. You can add more, but currently only the first one will be used.
-	- `url` - The gRPC url to reach the orderer. It must include the port.
-- `peers` - An object. Must have at least 1 entry. You can add more, but currently only the first one will be used.
-	- `url` - The gRPC url to reach the peer. It must include the port.
-	- `eventUrl` - The gRPC url to reach event endpoint of the peer. It must include the port and it is different than the discovery port!
-- `certificateAuthorities` - An object. Must have at least 1 entry. You can add more, but currently only the first one will be used.
-	- `url` - The gRPC url to reach the ca. It must include the port.
-	- `registrar` - An object of enroll IDs and secrets for this org.  Used for invokes and queries on chaincode.
-		- `enrollId` - A registered user's id on the CA. Can be found in the CA's yaml file.
-		- `enrollSecret` - A registered user's secret on the CA. Can be found in the CA's yaml file.
-	- `caName` - The CA to use to authenticate the enroll ID.
+		- `pem` - 관리자(admin) 개인키. 설치 및 초기화 시에 사용된다.
+	- `signedCert` - 이 오브젝트는 `path` **또는** `pem` 필드를 포함할 수 있는 점을 참고하십시오.
+		- `path` - 관리자(admin) 인증서 경로. 설치 및 초기화 시에 사용
+		- `pem` - 관리자(admin) 인증서. 설치 및 초기화 시에 사용
+- `orderers` - 오브젝트. 적어도 1 개의 엔트리를 가져야 함. 더 추가할 수도 있지만, 실습에서는 오직 1 개만 사용될 예정
+	- `url` - 오더러(orderer) 에 연결할 gRPC url 정보. 포트 정보를 반드시 포함해야 함
+- `peers` - 오브젝트. 적어도 1 개의 엔트리를 가져야 함. 더 추가할 수도 있지만, 실습에서는 오직 1개만 사용될 예정
+	- `url` - 피어(peer) 에 연결할 gRPC url 정보. 반드시 포트 정보를 포함해야 함.
+	- `eventUrl` - 피어(peer) 의 이벤트 엔드포인트에 연결할 gRPC url 정보. 반드시 포트 정보를 포함하여야 하며, 이것은 discovery 포트와는 다릅니다!
+- `certificateAuthorities` - 오브젝트. 적어도 1 개의 엔트리를 가져야 함. 더 추가할 수도 있지만 실습에서는 1개만 사용
+	- `url` - 인증서버(ca) 에 연결할 gRPC url 정보. 반드시 포트 정보를 포함해야 함
+	- `registrar` - 이 org 에서 사용되는 등록 ID (enroll IDs) 와 비밀번호(secrets) 오브젝트. 체인코드 호출(invoke) 및 쿼리(query) 시 사용됨.
+		- `enrollId` - CA서버에 등록된 사용자 ID. CA yaml 파일에서 찾을 수 있다.
+		- `enrollSecret` - CA서버에 등록돈 사용자 secret. CA yaml 파일에서 찾을 수 있다.
+	- `caName` - 등록 ID 를 인증할 CA 서버
 
-Once you have edited `connection_profile_tls.json` you are ready to install/instantiate Marbles.
+`connection_profile_tls.json` 파일 수정을 완료하면, 이제 구슬 애플리케이션을 설치/초기화할 준비가 된 것입니다.
 
-1. Continue where you left off in the [tutorial](../README.md#installchaincode).
+[다음 실습](../README.md#installchaincode) 으로 이동하십시오.
