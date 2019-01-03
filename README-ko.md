@@ -1,39 +1,4 @@
-*Read this in other languages: [English](README.md), [中国](README-cn.md), [português](README-pt.md)
-# Marbles Demo
-
-## 예제 소개
-- 이 애플리케이션은 Linux Foundation 프로젝트 [Hyperledger Fabric](https://github.com/hyperledger/fabric/tree/master/docs) 네트워크를 기반으로 한 예제입니다. Hyperledger Fabric에 대한 이해가 필요하다면 아래에 별첨되는 지침(instructions)들을 확인하세요.
-- **이 데모는 개발자가 Fabric 네트워크를 이용하여 체인코드와 앱 개발의 기본을 배울 수 있도록 도와 줍니다.**
-- 이 예제는 `매우 단순하게` 자산(asset, 예제에서는 marble)이 이동하는 것을 시연한 데모이며, 여러 사용자가 서로 자산을 만들어 전달할 수 있습니다.
-
-	![](/doc_images/marbles-peek.gif)
-
-### 버젼
-Marbles 예제에는 여러가지 버전이 있습니다. 이 버전은 **Hyperledger Fabric v1.1x**과 호환됩니다. 다른 버젼의 예제는 다른 브랜치에서 확인할 수 있습니다.
-
-***
-
-# 애플리케이션 설명
-
-이 애플리케이션을 통해 Hyperledger Fabric을 이용하여 여러 marbles 소유자들 간에 자산(marble)이 이동하는 과정을 확인할 수 있습니다.
-위 과정은 Node.js와 GoLang로 구현되었으며, 이 애플리케이션의 백엔드에서 GoLang으로 구현된 코드가 블록체인 네트워크에서 실행됩니다.
-아래 내용부터는 GoLang으로 구현된 코드를 '체인코드(chaincode)' 또는 'cc'로 부르도록 하겠습니다.
-체인코드는 자체적으로 체인코드 상태를 기록(저장)하여 marble을 만들며, key/value 문자열쌍을 데이터로 저장할 수 있습니다.
-따라서, 체인코드에는 다양한 구조의 데이터를 저장할 수 있도록 JSON 형식으로 변환(stringify)되어 저장됩니다.
-
-marble 데이터 속성:
-
-  1. id (unique string, 키 값으로 사용되는 유니크한 문자)
-  2. color (string, css 색상 값)
-  3. size (int, marble(구슬) 사이즈)
-  4. owner (string, 소유자명)
-
-우리는 위의 값들을 설정할 수 있는 UI를 만들어 블록체인의 원장에 저장할 예정입니다.
-marble은 key와 value 쌍으로 이루어져 있으며,
-`key`는 marble의 ID이고, `value`는 marble의 속성을 담고 있는 JSON 문자열입니다(위에 나열됨).
-체인코드(cc)는 gRPC 프로토콜을 이용하여 네트워크의 peer로 접속되어 상호작용합니다.
-gRPC 프로토콜에 대한 상세 내용은 [Hyperledger Fabric Client](https://www.npmjs.com/package/fabric-client)라고 불리는 SDK에서 확인할 수 있습니다.
-토폴로지에 대한 상세 내용은 아래 그림을 참고하십시오.
+# 애플리케이션 사용하기
 
 ### 애플리케이션 통신 흐름
 
@@ -45,84 +10,6 @@ gRPC 프로토콜에 대한 상세 내용은 [Hyperledger Fabric Client](https:/
 1. `Peer`는 `Marbles`의 체인코드 컨테이너와 통신합니다. 체인코드가 트랜잭션을 실행 및 테스트(run/simulate)한 후, 만약 어떤 문제가 없다면 그 트랜잭션을 승인하고 그 결과를 `Marbles` 애플리케이션으로 돌려 보냅니다.
 1. `Marbles` 애플리케이션은 (SDK를 통해) 승인된 제안을 `Ordering Service`로 보낼 것이며, orderer는 수신한 여러 제안을 블록으로 패키징 한 다음, 네트워크의 peer에 새 블록을 브로드캐스트 합니다.
 1. 최종적으로 `Peer`는 블록의 유효성을 확인하고 원장에 기록합니다. 이제 제안을 통한 트랜잭션이 적용되었으며 이후의 모든 요청에 이러한 변경 사항이 반영됩니다.
-
-***
-
-# Marbles Setup
-
-아래의 다양한 지침에 따라 **당신이** *정말* 원하는 설치 유형을 결정하세요.
-개발자용 설치를 건너뛰고 싶을 경우 단순한(brainless) 2-3번의 클릭으로 Marbles를 실행할 수 있으며,
-개발자용 설치를 원하는 경우에는 아래의 0에서 4까지의 지침을 따릅니다.
-설치가 끝날 때쯤에는 당신은 Hyperledger Fabric 전문가가 될 것이고, 스스로 설계(design)한 애플리케이션을 개발할 준비가 될 것입니다.
-
-이 모든 것을 건너뛰고 IBP([IBM Blockchain Platform](https://console.bluemix.net/developer/blockchain/dashboard)) 네트워크에서 Marbles를 사용해 보려면 [Toolchain 설치 흐름](./.bluemix/README.md)을 따르십시오. 친구들에게 깊은 인상을 심어 주고 싶다면, 둘 다 해 보세요.
-
-이미 Toolchain 설치를 완료한 경우에는 [Marbles 사용하기로 건너뛰기](./README.md#use)를 선택하세요.
-개발자용 설치를 선택한 경우에는 아래 내용을 계속해서 읽어 보세요.
-좋은 소식은 Marbles 예제와 블록체인 네트워크가 사용자의 선호도에 따라 다른 구성으로 설치 될 수 있다는 것입니다.
-나쁜 소식은 이것이 지침을 복잡하게 만든다는 것이다.
-**Hyperledger Fabric을 처음 사용하는 경우, 가장 간단한 설치 과정을 원한다면 :lollipop: 이모지가 표시된 지침을 따르세요.**
-당신은 지침을 따를 때(your own adventure)마다, 옵션을 선택할 수 있고 저는 가장 간단한 옵션에 :lollipop:를 떨어뜨려 놓을 것입니다. 이것은 당신을 위한 옵션입니다.
-
-### 0. 로컬환경에 설치
-
-**Git**과 **Go**, **Node.js**를 설치하기 위해 [지침](./docs/env_setup.md)에 따라 환경을 세팅합니다.
-
-- 완료되면 이 자습서로 돌아오십시오. 아래의 "Marbles 다운로드" 섹션을 시작합니다.
-
-<a name="downloadmarbles"></a>
-
-### 1. Marbles 다운로드
-로컬환경에 Marbles을 다운로드 받아야 합니다.
-Git을 사용하여 이 저장소를 내려받습니다 (clone).
-IBM Cloud에서 Marbles을 호스팅 하려는 경우에도 이 단계를 수행해야 합니다.
-
-- 명령 프롬프트/터미널을 열고 원하는 작업 디렉토리로 이동합니다.
-- 다음 명령을 실행합니다:
-
-	```
-	git clone https://github.com/IBM-Blockchain/marbles.git --depth 1
-	cd marbles
-	```
-
-- 좋습니다. 2단계로 넘어갑니다.
-
-<a name="getnetwork"></a>
-
-### 2. 네트워크 연결
-
-다시 만났군요. 이제 우리는 블록체인 네트워크가 필요합니다.
-
-**아래 옵션 중 한가지를 선택하세요:**
-
-- **Option 1:** IBM Cloud, IBM Blockchain Service에 네트워크 생성 - [지침](./docs/use_bluemix_hyperledger.md)
-- **Option 2:** :lollipop: 로컬 환경에서 Hyperledger Fabric 네트워크 사용 - [지침](./docs/use_local_hyperledger.md)
-
-<a name="installchaincode"></a>
-
-### 3. 체인코드 설치 및 인스턴스화
-
-좋아요, 거의 다 왔어요! 이제 우리는 marbles의 체인코드를 실행할 필요가 있어요.
-체인코드는 궁극적으로 원장에서 marbles 트랜잭션을 만드는 중요한 요소라는 것을 기억하세요.
-체인코드는 GoLang으로 작성된 코드로 우리의 peer 위에 설치하고 채널에서 인스턴스화 할 필요가 있습니다.
-코드는 이미 작성되어 있고, 우리는 단지 그것을 실행시키기만 하면 됩니다.
-체인코드를 실행하는데는 두가지 방법이 있습니다.
-
-진행중인 설치방법과 관련된 옵션 **한가지**를 선택하세요:
-
-- **Option 1:** IBM Blockchain Service에 체인코드 설치 및 인스턴스화 - [지침](./docs/install_chaincode.md)
-- **Option 2:** :lollipop: 로컬 환경에 SDK와 함께 체인코드 설치 및 인스턴스화 - [지침](./docs/install_chaincode_locally.md)
-
-<a name="hostmarbles"></a>
-
-### 4. Marbles 호스팅
-
-마지막으로 중요한 것은 우리는 어딘가에 marbles이 실행될 곳이 필요하다는 것입니다.
-
-**아래 옵션 한가지를 선택하세요:**
-
-- **Option 1:** IBM Cloud에서 Marbles 호스팅 - [지침](./docs/host_marbles_bluemix.md)
-- **Option 2:** :lollipop: 로컬에서 Marbles 호스팅 - [지침](./docs/host_marbles_locally.md)
 
 ***
 
@@ -158,29 +45,6 @@ IBM Cloud에서 Marbles을 호스팅 하려는 경우에도 이 단계를 수행
 1. 축하합니다. 이제 marbles 애플리케이션을 충분히 다룰 수 있습니다 :)!
 
 
-# 블록체인 배경지식
-Marbles의 작동 방식에 대해 이야기하기 전에 Hyperleder Fabric의 흐름과 토폴로지에 대해 살펴보겠습니다.
-먼저 몇가지 정의부터 알아봅시다.
-
-### 용어 정의:
-
-**Peer** - Peer는 블록체인 네트워크의 멤버로, Hyperledger Fabric을 실행하고 있습니다. marbles 예제 맥락에서 보면, Peer들은 특정 구슬 회사에 의해 소유되고 운영됩니다.
-
-**CA** - CA(인증 기관)는 블록체인 네트워크의 게이트키핑(gatekeeping)을 담당합니다. 이것은 marbles 예제의 node.js 애플리케이션과 같이, 클라이언트 측의 트랜잭션이 유효한지 증명합니다.
-
-**Orderer** - Orderer 또는 Ordering Service는 블록에 트랜잭션을 묶어서 일괄 처리하는 것이 주 목적인 블록체인 네트워크의 멤버입니다.
-
-**Users** - User는 블록체인과 상호 작용할 수 있는 권한을 가진 하나의 주체(entity)입니다. Marbles 예제에서, User는 관리자(Admin)를 뜻합니다. User는 원장을 조회하거나 가록할 수 있습니다.
-
-**Blocks** - 블록에는 무결성을 확인하기 위한 트랜잭션과 해시(hash)가 포함되어 있습니다.
-
-**Transactions** or **Proposals** - 블록체인의 원장에 대한 상호 작용을 나타냅니다. 원장의 읽기 또는 쓰기 요청은 트랜잭션 또는 제안의 형태로 보내집니다.
-
-**Ledger** - Peer가 블록체인에서 사용하는 저장소(storage)입니다. 여기에는 트랜잭션 파라미터와 key/value 쌍으로 구성된 실제 블록 데이터가 포함됩니다. 원장(Ledger)은 체인코드에 의해 기록됩니다.
-
-**Chaincode** - 체인코드는 스마트 컨트랙트를 Hyperledger Fabric에서 칭하는 용어입니다. 자산(assets) 및 자산과 관련된 모든 규칙을 정의합니다.
-
-**Assets** - 자산은 원장이 가지는 가치 또는 실체(entity)입니다. key/value 쌍으로 이뤄져 있으며, marbles 예제에서 자산은 구슬(marble) 또는 구슬의 소유자입니다.
 
 그럼 새로운 구슬이 만들어질 때 동작하는 과정을 살펴봅시다.
 
@@ -525,29 +389,3 @@ __/public/js/ui_building.js__
 관리자는 구슬을 움직였고, JS는 drag/drop을 감지했으며, 클라이언트는 웹소켓 메시지를 보내고, Marbles 애플리케이션은 웹소켓 메시지를 받습니다. SDK는 제안을 생성하거나 보내고, Peer는 제안를 승인합니다. SDK 정렬하기 위한 제안을 Orderer에게 보냅니다, Orderer는 정렬(패키징)하여 생성된 블록을 Peer에게 보냅니다, Peer는 블록을 커밋 합니다. node.js 코드는 주기적으로 새로운 구슬 상태를 얻습니다, 새로운 구슬 상태를 클라이언트에게 전달하면, 마침내 웹소켓 메시지를 받은 클라이언트는 새로운 구슬을 다시 그리게 됩니다.
 
 네, 끝입니다! 구슬을 옮기면서 즐거운 시간 보내셨기를 바랍니다.
-
-# Marbles FAQs
-marbles에 대해 궁금한점이 있으면 [FAQ](./docs/faq.md)를 확인해주세요.
-
-# Feedback
-피드백은 언제나 환영합니다.
-이 데모는 여러분과 같은 사람들을 위해 만들어진 데모입니다. 그리고 계속해서 개선될 것입니다.
-데모에 개선할 수 있는 방법이 있으면 손을 뻗어 도와주세요!
-구체적인 내용은 아래와 같습니다:
-
-- readme 양식은 괜찮았나요?
-- 진행에 막힌 부분이 있었나요?
-- 링크나 이미지가 누락된 것이 있나요?
-- 튜토리얼이 마칠때쯤 학습에 도움이 되었나요?
-- 당신을 고통받게 한 부분이 있었나요?
-- 어느부분이 당신에게 멘붕(existential crisis)을 주었고, 혼란하게 만들었나요?
-
-개선점과 버그, 또는 당신을 고통 받게한 부분은 [GitHub Issues](https://github.com/IBM-Blockchain/marbles/issues) 섹션을 통해 커뮤니케이션합니다.
-
-# Contribute
-이 데모의 개선에 기여를 원하신다면 [contributing guide](./CONTRIBUTING.md)를 확인해주세요.
-
-# License
-[Apache 2.0](LICENSE)
-
-***
