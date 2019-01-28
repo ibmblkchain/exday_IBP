@@ -1,4 +1,10 @@
-## IBM Blockchain Platform - Experience Day  
+# IBM Blockchain Experience Day  
+![intro.png](./doc_images/intro.png)  
+  
+## IBM Blockchain Platform - Experience Day 어젠다
+
+********
+
 #### [실습0_실습_개요](./실습0_실습_개요.md)  
 #### [실습1_실습환경_구성](./실습1_실습환경_구성.md)  
 #### [실습2_블록체인_네트워크_생성](./실습2_블록체인_네트워크_생성.md)  
